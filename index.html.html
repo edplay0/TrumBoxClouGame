@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Game PC - Thuê Trên Điện Thoại</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        header {
+            background: linear-gradient(90deg, #FFD700 0%, #1a1a1a 100%);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 1rem;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        header p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        nav {
+            background: #0f0f0f;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(255, 215, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav .menu a {
+            color: #FFD700;
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        nav .menu a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        nav .wallet {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        nav .wallet a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        nav .wallet a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        nav .wallet .balance {
+            color: #FFD700;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        nav .wallet .user-info {
+            color: #FFD700;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        nav .wallet .logout {
+            background: #FF4500;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        nav .wallet .logout:hover {
+            background: #FF6347;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+        }
+        .container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .section {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
+        }
+        .section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #FFD700;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .plan {
+            background: rgba(40, 40, 40, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #FFD700;
+            position: relative;
+        }
+        .plan.recommended {
+            background: linear-gradient(135deg, #FFD700 0%, #1a1a1a 100%);
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+        .plan.recommended::before {
+            content: 'Khuyến nghị';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFD700;
+            color: #1a1a1a;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+        }
+        .plan.recommended:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.5);
+        }
+        .plan h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #e0e0e0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .plan.recommended h3 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+        }
+        .plan .price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: #FFD700;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+        .plan.recommended .price {
+            font-size: 2.2rem;
+            color: #1a1a1a;
+        }
+        .plan .subscribers {
+            font-size: 1rem;
+            color: #b0b0b0;
+            margin: 0.5rem 0;
+        }
+        .plan p {
+            color: #d0d0d0;
+            margin: 0.3rem 0;
+        }
+        .plan button {
+            background: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .plan.recommended button {
+            background: #1a1a1a;
+            color: #FFD700;
+        }
+        .plan button:hover {
+            background: #e6c200;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        .plan.recommended button:hover {
+            background: #2c2c2c;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+        .plan button.loading::after {
+            content: '';
+            border: 2px solid #fff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            background: #1e1e1e;
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 550px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
+            animation: slideIn 0.3s ease;
+            border: 1px solid #FFD700;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #FFD700;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        .modal-content .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #FFD700;
+            transition: color 0.3s ease;
+        }
+        .modal-content .close:hover {
+            color: #FF4500;
+        }
+        .modal-content label {
+            display: block;
+            margin: 0.5rem 0 0.2rem;
+            font-weight: 500;
+            color: #FFD700;
+            text-align: left;
+        }
+        .modal-content input,
+        .modal-content select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #2c2c2c;
+            color: #e0e0e0;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .modal-content input:focus,
+        .modal-content select:focus {
+            border-color: #e6c200;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        .modal-content button {
+            background: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .modal-content button:hover {
+            background: #e6c200;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        .modal-content img.qr-code {
+            max-width: 200px;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 8px;
+            border: 2px solid #FFD700;
+        }
+        .modal-content p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            color: #d0d0d0;
+        }
+        .modal-content a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .modal-content a:hover {
+            color: #e6c200;
+            text-decoration: underline;
+        }
+        .modal-content .error {
+            color: #FF4500;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            display: none;
+        }
+        .modal-content .success {
+            color: #FFD700;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            display: none;
+        }
+        #adminManagement {
+            display: none;
+        }
+        #adminLink {
+            display: none;
+        }
+        .admin-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .admin-section ul li {
+            margin: 0.5rem 0;
+        }
+        .admin-section ul li a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .admin-section ul li a:hover {
+            color: #e6c200;
+            text-decoration: underline;
+        }
+        .admin-subsection {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(40, 40, 40, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.1);
+        }
+        .admin-subsection h4 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0;
+            color: #FFD700;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        .admin-subsection .item {
+            background: #2c2c2c;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(255, 215, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .admin-subsection .item:hover {
+            transform: translateY(-3px);
+        }
+        .admin-subsection button {
+            background: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            margin-left: 0.5rem;
+        }
+        .admin-subsection button.change-password {
+            background: #00CED1;
+            color: #1a1a1a;
+        }
+        .admin-subsection button.delete {
+            background: #FF4500;
+            color: white;
+        }
+        .admin-subsection button:hover {
+            background: #e6c200;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .admin-subsection button.change-password:hover {
+            background: #00CED1;
+            box-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+        }
+        .admin-subsection button.delete:hover {
+            background: #FF6347;
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+        }
+        .admin-subsection input {
+            padding: 0.8rem;
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            background: #2c2c2c;
+            color: #e0e0e0;
+        }
+        .pending-transactions, .pending-rentals {
+            margin-top: 1.5rem;
+        }
+        .transaction-item, .rental-item {
+            background: rgba(40, 40, 40, 0.9);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(255, 215, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .transaction-item:hover, .rental-item:hover {
+            transform: translateY(-3px);
+        }
+        .transaction-item button, .rental-item button {
+            background: #FFD700;
+            color: #1a1a1a;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .transaction-item button.reject, .rental-item button.reject {
+            background: #FF4500;
+            color: white;
+        }
+        .transaction-item button:hover, .rental-item button:hover {
+            background: #e6c200;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .transaction-item button.reject:hover, .rental-item button.reject:hover {
+            background: #FF6347;
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+        }
+        footer {
+            background: #0f0f0f;
+            color: #FFD700;
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 8px rgba(255, 215, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav .menu a {
+                margin: 0 0.8rem;
+                font-size: 1rem;
+            }
+            .section h2 {
+                font-size: 1.5rem;
+            }
+            .plan {
+                padding: 1.5rem;
+            }
+            .modal-content {
+                padding: 1.5rem;
+            }
+            .plan.recommended h3 {
+                font-size: 1.6rem;
+            }
+            .plan.recommended .price {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <h1>Cloud Game PC - Thuê Trên Điện Thoại</h1>
+        <p>Chơi game mượt mà trên mọi thiết bị với dịch vụ thuê máy tại Trumbox!</p>
+    </header>
+    <nav>
+        <div class="menu">
+            <a href="#home">Trang Chủ</a>
+            <a href="#pricing">Gói Dịch Vụ</a>
+            <a href="#about">Về Chúng Tôi</a>
+            <a href="#contact">Liên Hệ</a>
+            <a href="#adminManagement" id="adminLink">Quản Lý Admin</a>
+        </div>
+        <div class="wallet">
+            <span class="balance">Số dư: 0 VNĐ</span>
+            <a href="#" id="topupLink">Nạp Tiền</a>
+            <div id="authLinks">
+                <a href="#" id="loginLink">Đăng Nhập</a>
+                <a href="#" id="registerLink">Đăng Ký</a>
+            </div>
+            <div id="userInfo" style="display: none;">
+                <span class="user-info" id="userDetails"></span>
+                <button class="logout" id="logoutButton">Đăng Xuất</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="section" id="home">
+            <h2>Chào Mừng Đến Với Dịch Vụ Cloud Game</h2>
+            <p>Chơi các tựa game PC yêu thích trên điện thoại hoặc bất kỳ thiết bị nào với kết nối internet. Không cần cấu hình mạnh, chỉ cần đăng ký gói dịch vụ của chúng tôi!</p>
+            <p>Với công nghệ Cloud Server GPU, trải nghiệm game của bạn sẽ mượt mà, không giật lag, hỗ trợ độ phân giải lên đến 4K.</p>
+        </div>
+        <div class="section" id="pricing">
+            <h2>Gói Dịch Vụ</h2>
+            <div class="pricing">
+                <div class="plan recommended">
+                    <h3>Thuê Máy Trumbox</h3>
+                    <p class="price">10.000 VNĐ/giờ</p>
+                    <p class="subscribers">Đang có 1,234 người thuê</p>
+                    <p>Chơi không giới hạn các tựa game phổ biến.</p>
+                    <p>Hỗ trợ trên điện thoại, PC, tablet.</p>
+                    <p>Băng thông ổn định, độ trễ thấp.</p>
+                    <p style="font-size: 0.9rem; color: #b0b0b0;">Lưu ý: Trang Trumbox có thể hiển thị thêm các nội dung khác ngoài phần thuê máy.</p>
+                    <button onclick="rentTrumbox()">Thuê Ngay</button>
+                </div>
+                <div class="plan">
+                    <h3>Gói Nâng Cao</h3>
+                    <p class="price">350.000 VNĐ/Vĩnh Viễn</p>
+                    <p class="subscribers">Đang có 567 người thuê</p>
+                    <p>Truy cập toàn bộ thư viện game.</p>
+                    <p>Hỗ trợ độ phân giải 4K, 60FPS.</p>
+                    <p>Ưu tiên kết nối máy chủ VIP.</p>
+                    <button onclick="purchasePlan('Gói Nâng Cao', 350000)">Mua Gói</button>
+                </div>
+            </div>
+        </div>
+        <div class="section admin-section" id="adminManagement">
+            <h2>Quản Lý Admin</h2>
+            <p>Chào mừng đến với bảng điều khiển quản trị. Các tính năng quản lý bao gồm:</p>
+            <div class="admin-subsection" id="manage-users">
+                <h4>Quản Lý Người Dùng</h4>
+                <div id="userList"></div>
+            </div>
+            <div class="admin-subsection" id="gift-balance">
+                <h4>Tặng Số Dư Cho Người Chơi</h4>
+                <label for="playerIds">Nhập ID Người Chơi (cách nhau bằng dấu phẩy, ví dụ: ID123456, ID789012):</label>
+                <input type="text" id="playerIds" placeholder="Nhập danh sách ID" required>
+                <label for="giftAmount">Số Tiền Tặng (VNĐ):</label>
+                <input type="number" id="giftAmount" min="1000" placeholder="Nhập số tiền tặng" required>
+                <button onclick="giftBalanceToPlayers()">Tặng</button>
+            </div>
+            <div class="admin-subsection" id="manage-plans">
+                <h4>Quản Lý Gói Dịch Vụ</h4>
+                <div id="planList">
+                    <div class="item">Gói Nâng Cao (350.000 VNĐ/Vĩnh Viễn) - <button onclick="editPlan('Gói Nâng Cao')">Sửa</button><button class="delete" onclick="deletePlan('Gói Nâng Cao')">Xóa</button></div>
+                </div>
+            </div>
+            <div class="admin-subsection pending-rentals">
+                <h4>Yêu Cầu Thuê Máy Chờ Duyệt</h4>
+                <div id="pendingRentals"></div>
+            </div>
+            <div class="admin-subsection pending-transactions">
+                <h4>Yêu Cầu Nạp Tiền Chờ Duyệt</h4>
+                <div id="pendingTransactions"></div>
+            </div>
+            <div class="admin-subsection" id="statistics">
+                <h4>Thống Kê</h4>
+                <div id="statsDisplay"></div>
+                <button onclick="refreshStats()">Làm Mới Thống Kê</button>
+            </div>
+            <div class="admin-subsection" id="system-settings">
+                <h4>Cài Đặt Hệ Thống</h4>
+                <p>Thông báo bảo trì: <button onclick="toggleMaintenance()">Bật/Tắt</button></p>
+                <p>Thời gian bảo trì: 00:00 - 02:00</p>
+            </div>
+            <div class="admin-subsection" id="manage-games">
+                <h4>Quản Lý Trò Chơi</h4>
+                <div id="gameList">
+                    <div class="item">Game 1 - <button onclick="editGame('Game 1')">Sửa</button><button class="delete" onclick="deleteGame('Game 1')">Xóa</button></div>
+                    <div class="item">Game 2 - <button onclick="editGame('Game 2')">Sửa</button><button class="delete" onclick="deleteGame('Game 2')">Xóa</button></div>
+                </div>
+            </div>
+            <button onclick="logoutAdmin()">Đăng Xuất Admin</button>
+        </div>
+        <div class="section" id="about">
+            <h2>Về Chúng Tôi</h2>
+            <p>Chúng tôi là nhà cung cấp dịch vụ Cloud Gaming hàng đầu tại Việt Nam, mang đến trải nghiệm chơi game chất lượng cao với chi phí tiết kiệm. Sử dụng công nghệ Cloud Server GPU hiện đại, chúng tôi đảm bảo bạn có thể chơi game mọi lúc, mọi nơi.</p>
+        </div>
+        <div class="section" id="contact">
+            <h2>Liên Hệ</h2>
+            <p>Email: support@cloudgame.vn</p>
+            <p>Hotline: 1900 1234</p>
+            <p>Địa chỉ: 123 Đường Game, TP. Hồ Chí Minh, Việt Nam</p>
+        </div>
+    </div>
+    <!-- Modal for Top-up -->
+    <div class="modal" id="topupModal">
+        <div class="modal-content">
+            <span class="close" id="closeTopupModal">×</span>
+            <h3>Nạp Tiền</h3>
+            <form id="topupForm">
+                <label for="paymentMethod">Phương Thức Thanh Toán</label>
+                <select id="paymentMethod" name="paymentMethod" onchange="toggleForm()">
+                    <option value="bank">Ngân Hàng VietinBank (QR Code)</option>
+                    <option value="card">Thẻ Cào</option>
+                </select>
+                <!-- Bank QR Form -->
+                <div id="bankForm">
+                    <p>Quét mã QR dưới đây để thanh toán qua VietinBank:</p>
+                    <img src="https://i.imgur.com/4mmpR89.png" alt="QR Code VietinBank" class="qr-code">
+                    <p><strong>Hướng dẫn:</strong></p>
+                    <p>Mở ứng dụng VietinBank, quét mã QR trên để vào trang thanh toán, nhập số tiền và xác nhận giao dịch.</p>
+                    <p>Tối thiểu nạp tiền vào tài khoản: 10.000đ.</p>
+                    <p>Nếu nạp dưới 10.000đ mà không hiện số dư tài khoản, vui lòng liên hệ qua <a href="https://discord.com" target="_blank">Discord</a> để được kiểm tra.</p>
+                    <p>Sau khi đã thanh toán, yêu cầu sẽ được gửi đến admin để duyệt.</p>
+                    <p>Vui lòng F5 / Refresh / "Làm mới" lại trang sau khi admin phê duyệt.</p>
+                    <label for="qrAmount">Số Tiền (VNĐ)</label>
+                    <input type="number" id="qrAmount" name="qrAmount" placeholder="Nhập số tiền" min="10000" required>
+                </div>
+                <!-- Card Form -->
+                <div id="cardForm" style="display: none;">
+                    <p><strong>Hướng dẫn:</strong></p>
+                    <p>Tối thiểu nạp tiền vào tài khoản: 10.000đ.</p>
+                    <p>Nếu nạp dưới 10.000đ mà không hiện số dư tài khoản, vui lòng liên hệ qua <a href="https://discord.com" target="_blank">Discord</a> để được kiểm tra.</p>
+                    <p>Sau khi đã thanh toán, yêu cầu sẽ được gửi đến admin để duyệt.</p>
+                    <p>Vui lòng F5 / Refresh / "Làm mới" lại trang sau khi admin phê duyệt.</p>
+                    <label for="cardProvider">Nhà Mạng</label>
+                    <select id="cardProvider" name="cardProvider">
+                        <option value="viettel">Viettel</option>
+                        <option value="mobifone">Mobifone</option>
+                        <option value="vinaphone">Vinaphone</option>
+                    </select>
+                    <label for="cardAmount">Mệnh Giá (VNĐ)</label>
+                    <select id="cardAmount" name="cardAmount">
+                        <option value="10000">10.000</option>
+                        <option value="20000">20.000</option>
+                        <option value="50000">50.000</option>
+                        <option value="100000">100.000</option>
+                    </select>
+                    <label for="cardCode">Mã Thẻ</label>
+                    <input type="text" id="cardCode" name="cardCode" placeholder="Nhập mã thẻ cào" required>
+                    <label for="cardSerial">Số Serial</label>
+                    <input type="text" id="cardSerial" name="cardSerial" placeholder="Nhập số serial thẻ" required>
+                </div>
+                <button type="submit">Xác Nhận Nạp Tiền</button>
+                <p class="success" id="topupSuccess">Yêu cầu nạp tiền đã được gửi đến admin để duyệt!</p>
+            </form>
+        </div>
+    </div>
+    <!-- Modal for Login -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" id="closeLoginModal">×</span>
+            <h3>Đăng Nhập</h3>
+            <form id="loginForm">
+                <p class="error" id="loginError"></p>
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="loginEmail" placeholder="Nhập email" required>
+                <label for="loginPassword">Mật Khẩu</label>
+                <input type="password" id="loginPassword" name="loginPassword" placeholder="Nhập mật khẩu" required>
+                <button type="submit">Đăng Nhập</button>
+                <p>Chưa có tài khoản? <a href="#" id="showRegister">Đăng Ký</a></p>
+            </form>
+        </div>
+    </div>
+    <!-- Modal for Register -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close" id="closeRegisterModal">×</span>
+            <h3>Đăng Ký</h3>
+            <form id="registerForm">
+                <p class="error" id="registerError"></p>
+                <p class="success" id="registerSuccess">Đăng ký thành công! Đang chuyển đến đăng nhập...</p>
+                <label for="registerUsername">Tên Người Dùng</label>
+                <input type="text" id="registerUsername" name="registerUsername" placeholder="Nhập tên người dùng" required>
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" name="registerEmail" placeholder="Nhập email" required>
+                <label for="registerPassword">Mật Khẩu</label>
+                <input type="password" id="registerPassword" name="registerPassword" placeholder="Nhập mật khẩu" required>
+                <label for="confirmPassword">Xác Nhận Mật Khẩu</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                <button type="submit" id="registerButton">Đăng Ký</button>
+                <p>Đã có tài khoản? <a href="#" id="showLogin">Đăng Nhập</a></p>
+            </form>
+        </div>
+    </div>
+    <!-- Modal for Change Password -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <span class="close" id="closeChangePasswordModal">×</span>
+            <h3>Đổi Mật Khẩu</h3>
+            <form id="changePasswordForm">
+                <p class="error" id="changePasswordError"></p>
+                <p class="success" id="changePasswordSuccess">Đổi mật khẩu thành công!</p>
+                <label for="newPassword">Mật Khẩu Mới</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới" required>
+                <label for="confirmNewPassword">Xác Nhận Mật Khẩu Mới</label>
+                <input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Xác nhận mật khẩu mới" required>
+                <button type="submit">Xác Nhận</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 Cloud Game PC. All rights reserved.</p>
+    </footer>
+    <script>
+        // Khởi tạo particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#FFD700' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#FFD700', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // Khởi tạo dữ liệu
+        let defaultUsers = [
+            { username: "minh14", email: "minh14@example.com", password: "minh2008", playerId: "IDADMIN1", balance: 0, isAdmin: true },
+            { username: "Người Chơi 1", email: "player1@example.com", password: "123456", playerId: "ID123456", balance: 0, isAdmin: false }
+        ];
+
+        // Load dữ liệu từ localStorage, nếu không có thì sử dụng dữ liệu mặc định
+        let users = JSON.parse(localStorage.getItem('users'));
+        if (!users || !users.some(user => user.email === "minh14@example.com")) {
+            users = defaultUsers;
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        let isAdmin = localStorage.getItem('isAdmin') === 'true';
+        let userData = JSON.parse(localStorage.getItem('userData')) || { username: "", playerId: "", balance: 0 };
+        let pendingTransactions = JSON.parse(localStorage.getItem('pendingTransactions')) || [];
+        let pendingRentals = JSON.parse(localStorage.getItem('pendingRentals')) || [];
+        let approvedRentals = JSON.parse(localStorage.getItem('approvedRentals')) || [];
+        let stats = JSON.parse(localStorage.getItem('stats')) || { totalUsers: 1800, revenue: 150000000, activeUsers: 1200 };
+
+        const adminLink = document.getElementById('adminLink');
+        const adminSection = document.getElementById('adminManagement');
+        const authLinks = document.getElementById('authLinks');
+        const userInfo = document.getElementById('userInfo');
+        const userDetails = document.getElementById('userDetails');
+        const balanceDisplay = document.querySelector('.balance');
+        const logoutButton = document.getElementById('logoutButton');
+        const pendingTransactionsDiv = document.getElementById('pendingTransactions');
+        const pendingRentalsDiv = document.getElementById('pendingRentals');
+        const userListDiv = document.getElementById('userList');
+        const statsDisplay = document.getElementById('statsDisplay');
+
+        function saveData() {
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('pendingTransactions', JSON.stringify(pendingTransactions));
+            localStorage.setItem('pendingRentals', JSON.stringify(pendingRentals));
+            localStorage.setItem('approvedRentals', JSON.stringify(approvedRentals));
+            localStorage.setItem('stats', JSON.stringify(stats));
+            localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('isLoggedIn', isLoggedIn.toString());
+            localStorage.setItem('isAdmin', isAdmin.toString());
+        }
+
+        function updateUserInterface() {
+            if (isLoggedIn && userData.playerId) {
+                authLinks.style.display = 'none';
+                userInfo.style.display = 'flex';
+                userDetails.textContent = `${userData.username} (${userData.playerId})`;
+                balanceDisplay.textContent = `Số dư: ${userData.balance} VNĐ`;
+            } else {
+                authLinks.style.display = 'flex';
+                userInfo.style.display = 'none';
+            }
+
+            if (isAdmin) {
+                adminLink.style.display = 'inline';
+                adminSection.style.display = 'block';
+                displayPendingTransactions();
+                displayPendingRentals();
+                displayUserList();
+                displayStats();
+            } else {
+                adminLink.style.display = 'none';
+                adminSection.style.display = 'none';
+            }
+        }
+
+        function rentTrumbox() {
+            if (!isLoggedIn) {
+                alert('Vui lòng đăng nhập trước khi thuê máy!');
+                return;
+            }
+
+            // Kiểm tra xem yêu cầu đã được duyệt chưa
+            const isApproved = approvedRentals.some(rental => rental.playerId === userData.playerId);
+            if (isApproved) {
+                if (userData.balance < 10000) {
+                    alert('Số dư không đủ, vui lòng nạp thêm! (Cần ít nhất 10.000 VNĐ để thuê máy)');
+                    return;
+                }
+
+                const button = event.target;
+                button.classList.add('loading');
+                button.disabled = true;
+                button.textContent = 'Đang xử lý...';
+
+                setTimeout(() => {
+                    userData.balance -= 10000;
+                    stats.revenue += 10000;
+                    const user = users.find(u => u.playerId === userData.playerId);
+                    if (user) {
+                        user.balance = userData.balance;
+                    }
+                    approvedRentals = approvedRentals.filter(rental => rental.playerId !== userData.playerId);
+                    saveData();
+                    alert('Thuê máy thành công! Đang chuyển đến Trumbox...');
+                    button.classList.remove('loading');
+                    button.disabled = false;
+                    button.textContent = 'Thuê Ngay';
+                    window.open('https://trumbox.net/cloud-gaming/play/', '_blank');
+                    updateUserInterface();
+                }, 2000);
+                return;
+            }
+
+            // Kiểm tra nếu đã có yêu cầu chờ duyệt
+            const hasPendingRequest = pendingRentals.some(rental => rental.playerId === userData.playerId);
+            if (hasPendingRequest) {
+                alert('Bạn đã có yêu cầu thuê máy đang chờ duyệt. Vui lòng chờ admin phê duyệt!');
+                return;
+            }
+
+            // Kiểm tra số dư
+            if (userData.balance < 10000) {
+                alert('Số dư không đủ, vui lòng nạp thêm! (Cần ít nhất 10.000 VNĐ để thuê máy)');
+                return;
+            }
+
+            // Gửi yêu cầu thuê máy
+            const username = userData.username;
+            const playerId = userData.playerId;
+            const timestamp = new Date().toISOString();
+            pendingRentals.push({ username, playerId, timestamp });
+            saveData();
+            alert('Yêu cầu thuê máy đã được gửi, chờ admin duyệt! Vui lòng F5/Refresh sau khi admin duyệt để tiếp tục.');
+            updateUserInterface();
+        }
+
+        function displayPendingRentals() {
+            pendingRentalsDiv.innerHTML = '<p>Đang tải yêu cầu thuê máy...</p>';
+            if (pendingRentals.length === 0) {
+                pendingRentalsDiv.innerHTML = '<p>Không có yêu cầu thuê máy nào chờ duyệt.</p>';
+                return;
+            }
+            pendingRentalsDiv.innerHTML = '';
+            pendingRentals.forEach((rental, index) => {
+                const rentalItem = document.createElement('div');
+                rentalItem.className = 'rental-item';
+                rentalItem.innerHTML = `
+                    Người dùng: ${rental.username} (ID: ${rental.playerId}) - 
+                    Thời gian: ${rental.timestamp}
+                    <button onclick="approveRental(${index})">Phê Duyệt</button>
+                    <button class="reject" onclick="rejectRental(${index})">Từ Chối</button>
+                `;
+                pendingRentalsDiv.appendChild(rentalItem);
+            });
+        }
+
+        function approveRental(index) {
+            const rental = pendingRentals[index];
+            approvedRentals.push({ playerId: rental.playerId });
+            pendingRentals.splice(index, 1);
+            saveData();
+            alert('Yêu cầu thuê máy đã được phê duyệt.');
+            updateUserInterface();
+        }
+
+        function rejectRental(index) {
+            pendingRentals.splice(index, 1);
+            saveData();
+            alert('Yêu cầu thuê máy đã bị từ chối.');
+            updateUserInterface();
+        }
+
+        function changePassword(username) {
+            const changePasswordModal = document.getElementById('changePasswordModal');
+            const changePasswordForm = document.getElementById('changePasswordForm');
+            const changePasswordError = document.getElementById('changePasswordError');
+            const changePasswordSuccess = document.getElementById('changePasswordSuccess');
+
+            changePasswordModal.style.display = 'flex';
+            changePasswordError.style.display = 'none';
+            changePasswordSuccess.style.display = 'none';
+            changePasswordForm.reset();
+
+            changePasswordForm.onsubmit = (e) => {
+                e.preventDefault();
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+                if (newPassword.length < 6) {
+                    changePasswordError.textContent = 'Mật khẩu mới phải có ít nhất 6 ký tự.';
+                    changePasswordError.style.display = 'block';
+                    return;
+                }
+                if (newPassword !== confirmNewPassword) {
+                    changePasswordError.textContent = 'Mật khẩu xác nhận không khớp.';
+                    changePasswordError.style.display = 'block';
+                    return;
+                }
+
+                const user = users.find(u => u.username === username);
+                if (user) {
+                    user.password = newPassword;
+                    saveData();
+                    changePasswordError.style.display = 'none';
+                    changePasswordSuccess.style.display = 'block';
+                    setTimeout(() => {
+                        changePasswordModal.style.display = 'none';
+                        changePasswordSuccess.style.display = 'none';
+                    }, 2000);
+                }
+            };
+        }
+
+        document.getElementById('closeChangePasswordModal').addEventListener('click', () => {
+            document.getElementById('changePasswordModal').style.display = 'none';
+            document.getElementById('changePasswordError').style.display = 'none';
+            document.getElementById('changePasswordSuccess').style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('changePasswordModal')) {
+                document.getElementById('changePasswordModal').style.display = 'none';
+                document.getElementById('changePasswordError').style.display = 'none';
+                document.getElementById('changePasswordSuccess').style.display = 'none';
+            }
+        });
+
+        function giftBalanceToPlayers() {
+            const playerIdsInput = document.getElementById('playerIds').value.trim();
+            const giftAmount = parseInt(document.getElementById('giftAmount').value);
+            if (!playerIdsInput || isNaN(giftAmount) || giftAmount < 1000) {
+                alert('Vui lòng nhập danh sách ID và số tiền tặng phải lớn hơn hoặc bằng 1.000 VNĐ!');
+                return;
+            }
+
+            const playerIds = playerIdsInput.split(',').map(id => id.trim());
+            let successful = 0;
+            let failed = 0;
+
+            playerIds.forEach(playerId => {
+                const user = users.find(u => u.playerId === playerId);
+                if (user && !user.isAdmin) {
+                    user.balance += giftAmount;
+                    if (user.playerId === userData.playerId) {
+                        userData.balance = user.balance;
+                    }
+                    successful++;
+                } else {
+                    failed++;
+                }
+            });
+
+            saveData();
+            alert(`Đã tặng ${giftAmount} VNĐ thành công cho ${successful} người chơi. ${failed} ID không hợp lệ hoặc là admin.`);
+            updateUserInterface();
+            document.getElementById('playerIds').value = '';
+            document.getElementById('giftAmount').value = '';
+        }
+
+        function displayPendingTransactions() {
+            pendingTransactionsDiv.innerHTML = '<p>Đang tải giao dịch...</p>';
+            if (pendingTransactions.length === 0) {
+                pendingTransactionsDiv.innerHTML = '<p>Không có giao dịch nào chờ duyệt.</p>';
+                return;
+            }
+            pendingTransactionsDiv.innerHTML = '';
+            pendingTransactions.forEach((tx, index) => {
+                const txItem = document.createElement('div');
+                txItem.className = 'transaction-item';
+                txItem.innerHTML = `
+                    Người dùng: ${tx.username} (ID: ${tx.playerId}) - 
+                    Số tiền: ${tx.amount} VNĐ - 
+                    Thời gian: ${tx.timestamp}
+                    <button onclick="approveTransaction(${index})">Phê Duyệt</button>
+                    <button class="reject" onclick="rejectTransaction(${index})">Từ Chối</button>
+                `;
+                pendingTransactionsDiv.appendChild(txItem);
+            });
+        }
+
+        function displayUserList() {
+            userListDiv.innerHTML = '<p>Đang tải danh sách người dùng...</p>';
+            if (users.length === 0) {
+                userListDiv.innerHTML = '<p>Không có người dùng nào.</p>';
+                return;
+            }
+            userListDiv.innerHTML = '';
+            users.forEach(user => {
+                if (user.username !== userData.username && !user.isAdmin) {
+                    const userItem = document.createElement('div');
+                    userItem.className = 'item';
+                    userItem.innerHTML = `
+                        ${user.username} (${user.playerId}) - 
+                        Số dư: ${user.balance} VNĐ -
+                        <button onclick="changePassword('${user.username}')">Đổi Mật Khẩu</button>
+                        <button onclick="editUser('${user.username}')">Sửa</button>
+                        <button class="delete" onclick="deleteUser('${user.username}')">Xóa</button>
+                    `;
+                    userListDiv.appendChild(userItem);
+                }
+            });
+        }
+
+        function displayStats() {
+            statsDisplay.innerHTML = `
+                <p>Tổng người dùng: ${stats.totalUsers}</p>
+                <p>Doanh thu: ${stats.revenue} VNĐ</p>
+                <p>Người dùng hoạt động: ${stats.activeUsers}</p>
+            `;
+        }
+
+        function approveTransaction(index) {
+            const tx = pendingTransactions[index];
+            const user = users.find(u => u.playerId === tx.playerId);
+            if (user) {
+                user.balance += parseInt(tx.amount);
+                stats.revenue += parseInt(tx.amount);
+                pendingTransactions.splice(index, 1);
+                if (user.playerId === userData.playerId) {
+                    userData.balance = user.balance;
+                }
+                saveData();
+                alert('Giao dịch đã được phê duyệt.');
+                updateUserInterface();
+            }
+        }
+
+        function rejectTransaction(index) {
+            pendingTransactions.splice(index, 1);
+            saveData();
+            alert('Giao dịch đã bị từ chối.');
+            updateUserInterface();
+        }
+
+        function editUser(username) {
+            alert(`Chức năng sửa thông tin người dùng ${username} sẽ được triển khai sau.`);
+        }
+
+        function deleteUser(username) {
+            const userIndex = users.findIndex(u => u.username === username);
+            if (userIndex !== -1) {
+                const user = users[userIndex];
+                pendingRentals = pendingRentals.filter(rental => rental.playerId !== user.playerId);
+                approvedRentals = approvedRentals.filter(rental => rental.playerId !== user.playerId);
+                users.splice(userIndex, 1);
+                stats.totalUsers = users.length;
+                stats.activeUsers = Math.max(0, stats.activeUsers - 1);
+                saveData();
+                alert(`Đã xóa người dùng ${username}.`);
+                updateUserInterface();
+            }
+        }
+
+        function editPlan(planName) {
+            alert(`Chức năng sửa gói dịch vụ ${planName} sẽ được triển khai sau.`);
+        }
+
+        function deletePlan(planName) {
+            alert(`Đã xóa gói dịch vụ ${planName}.`);
+        }
+
+        function editGame(gameName) {
+            alert(`Chức năng sửa trò chơi ${gameName} sẽ được triển khai sau.`);
+        }
+
+        function deleteGame(gameName) {
+            alert(`Đã xóa trò chơi ${gameName}.`);
+        }
+
+        function refreshStats() {
+            stats.totalUsers = users.length;
+            stats.activeUsers = Math.floor(Math.random() * stats.totalUsers);
+            saveData();
+            alert('Thống kê đã được làm mới.');
+            updateUserInterface();
+        }
+
+        function toggleMaintenance() {
+            alert('Chế độ bảo trì đã được bật/tắt.');
+        }
+
+        function purchasePlan(planName, price) {
+            if (!isLoggedIn) {
+                alert('Vui lòng đăng nhập trước khi mua gói!');
+                return;
+            }
+            if (userData.balance < price) {
+                alert('Số dư không đủ để mua gói này!');
+                return;
+            }
+            const button = event.target;
+            button.classList.add('loading');
+            button.disabled = true;
+            button.textContent = 'Đang xử lý...';
+            setTimeout(() => {
+                userData.balance -= price;
+                const user = users.find(u => u.playerId === userData.playerId);
+                if (user) {
+                    user.balance = userData.balance;
+                }
+                saveData();
+                alert(`Đã mua ${planName} thành công!`);
+                button.classList.remove('loading');
+                button.disabled = false;
+                button.textContent = 'Mua Gói';
+                try {
+                    window.location.href = 'success.html';
+                } catch (error) {
+                    console.error('Lỗi khi chuyển hướng:', error);
+                    alert('Mua gói thành công, nhưng không thể chuyển hướng đến trang thành công. Vui lòng kiểm tra file success.html.');
+                }
+                updateUserInterface();
+            }, 2000);
+        }
+
+        updateUserInterface();
+
+        logoutButton.addEventListener('click', () => {
+            isLoggedIn = false;
+            isAdmin = false;
+            userData = { username: "", playerId: "", balance: 0 };
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('isAdmin');
+            localStorage.removeItem('userData');
+            updateUserInterface();
+        });
+
+        function logoutAdmin() {
+            isLoggedIn = false;
+            isAdmin = false;
+            userData = { username: "", playerId: "", balance: 0 };
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('isAdmin');
+            localStorage.removeItem('userData');
+            updateUserInterface();
+        }
+
+        const topupModal = document.getElementById('topupModal');
+        const topupLink = document.getElementById('topupLink');
+        const closeTopupModal = document.getElementById('closeTopupModal');
+        const topupForm = document.getElementById('topupForm');
+        const topupSuccess = document.getElementById('topupSuccess');
+
+        topupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            topupModal.style.display = 'flex';
+            topupSuccess.style.display = 'none';
+        });
+
+        closeTopupModal.addEventListener('click', () => {
+            topupModal.style.display = 'none';
+            topupSuccess.style.display = 'none';
+        });
+
+        topupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!isLoggedIn) {
+                alert('Vui lòng đăng nhập trước khi nạp tiền!');
+                return;
+            }
+            const amount = parseInt(document.getElementById('qrAmount')?.value || document.getElementById('cardAmount')?.value || 0);
+            if (amount < 10000) {
+                alert('Số tiền nạp phải lớn hơn hoặc bằng 10.000 VNĐ!');
+                return;
+            }
+            const username = userData.username;
+            const playerId = userData.playerId;
+            const timestamp = new Date().toISOString();
+            pendingTransactions.push({ username, playerId, amount, timestamp });
+            saveData();
+            topupSuccess.textContent = 'Yêu cầu nạp tiền đã được gửi đến admin để duyệt!';
+            topupSuccess.style.display = 'block';
+            topupForm.reset();
+            setTimeout(() => {
+                topupModal.style.display = 'none';
+            }, 2000);
+        });
+
+        const loginModal = document.getElementById('loginModal');
+        const loginLink = document.getElementById('loginLink');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+            topupModal.style.display = 'none';
+            registerModal.style.display = 'none';
+            loginError.style.display = 'none';
+        });
+
+        closeLoginModal.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+            loginError.style.display = 'none';
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const user = users.find(u => u.email === email && u.password === password);
+            if (!user) {
+                loginError.textContent = 'Email hoặc mật khẩu không đúng!';
+                loginError.style.display = 'block';
+                return;
+            }
+            isLoggedIn = true;
+            userData = { username: user.username, playerId: user.playerId, balance: user.balance };
+            isAdmin = user.isAdmin;
+            saveData();
+            updateUserInterface();
+            loginModal.style.display = 'none';
+        });
+
+        const registerModal = document.getElementById('registerModal');
+        const registerLink = document.getElementById('registerLink');
+        const closeRegisterModal = document.getElementById('closeRegisterModal');
+        const registerForm = document.getElementById('registerForm');
+        const registerError = document.getElementById('registerError');
+        const registerSuccess = document.getElementById('registerSuccess');
+        const registerButton = document.getElementById('registerButton');
+
+        registerLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'flex';
+            topupModal.style.display = 'none';
+            loginModal.style.display = 'none';
+            registerError.style.display = 'none';
+            registerSuccess.style.display = 'none';
+            registerButton.style.display = 'block';
+            registerForm.reset();
+        });
+
+        closeRegisterModal.addEventListener('click', () => {
+            registerModal.style.display = 'none';
+            registerError.style.display = 'none';
+            registerSuccess.style.display = 'none';
+            registerButton.style.display = 'block';
+        });
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            let errorMessage = '';
+            if (username.length < 3) {
+                errorMessage = 'Tên người dùng phải có ít nhất 3 ký tự.';
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errorMessage = 'Email không hợp lệ.';
+            } else if (password.length < 6) {
+                errorMessage = 'Mật khẩu phải có ít nhất 6 ký tự.';
+            } else if (password !== confirmPassword) {
+                errorMessage = 'Mật khẩu xác nhận không khớp.';
+            } else if (users.some(u => u.email === email)) {
+                errorMessage = 'Email đã được sử dụng!';
+            } else if (users.some(u => u.username === username)) {
+                errorMessage = 'Tên người dùng đã tồn tại!';
+            }
+
+            if (errorMessage) {
+                registerError.textContent = errorMessage;
+                registerError.style.display = 'block';
+                registerSuccess.style.display = 'none';
+                return;
+            }
+
+            const playerId = `ID${Math.floor(Math.random() * 1000000)}`;
+            const newUser = {
+                username,
+                email,
+                password,
+                playerId,
+                balance: 0,
+                isAdmin: false
+            };
+            users.push(newUser);
+            stats.totalUsers = users.length;
+            stats.activeUsers = Math.floor(Math.random() * stats.totalUsers);
+            userData = { username, playerId, balance: 0 };
+            isLoggedIn = true;
+            isAdmin = newUser.isAdmin;
+            saveData();
+            registerError.style.display = 'none';
+            registerSuccess.style.display = 'block';
+            registerButton.style.display = 'none';
+            setTimeout(() => {
+                registerModal.style.display = 'none';
+                loginModal.style.display = 'flex';
+                registerSuccess.style.display = 'none';
+                registerButton.style.display = 'block';
+                registerForm.reset();
+                updateUserInterface();
+            }, 2000);
+        });
+
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'flex';
+            registerError.style.display = 'none';
+            registerSuccess.style.display = 'none';
+            registerButton.style.display = 'block';
+            registerForm.reset();
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === topupModal) {
+                topupModal.style.display = 'none';
+                topupSuccess.style.display = 'none';
+            }
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                loginError.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+                registerError.style.display = 'none';
+                registerSuccess.style.display = 'none';
+                registerButton.style.display = 'block';
+            }
+        });
+
+        function toggleForm() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const bankForm = document.getElementById('bankForm');
+            const cardForm = document.getElementById('cardForm');
+
+            if (paymentMethod === 'bank') {
+                bankForm.style.display = 'block';
+                cardForm.style.display = 'none';
+            } else {
+                bankForm.style.display = 'none';
+                cardForm.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
